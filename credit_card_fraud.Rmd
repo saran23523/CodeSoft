@@ -1,0 +1,41 @@
+---
+title: "credit_card_fraud"
+author: "Saran Babu A"
+date: "2024-06-30"
+output: pdf_document
+---
+
+```{python}
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, accuracy_score 
+
+```
+
+
+
+```{python}
+data = pd.read_csv('C:/Users/Saran Babu/Downloads/archive (4)/creditcard.csv')
+fraud_cases=len(data[data['Class']==1])
+print(fraud_cases)
+
+```
+```{python}
+
+x = data.drop(['Class'], axis=1)
+y = data['Class']
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+model = RandomForestClassifier()
+model.fit(x_train, y_train)
+
+
+print(x_train)
+y_pred = model.predict(x_test)
+accuracy = accuracy_score(y_test,y_pred)
+print("Accuracy : ", accuracy)
+```
+
+
